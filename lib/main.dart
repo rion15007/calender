@@ -1,4 +1,5 @@
-// import 'dart:math';
+import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,8 +30,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final List<DropdownMenuItem<int>> _items = [];
   int _selectItem = 0;
+  int _countFlower = 10;
 
   List<bool> isSelected = List.generate(3, (index) => false);
+  final random = Random();
+  double get randomValue => (random.nextDouble() * 2) - 1;
 
   @override
   void initState() {
@@ -113,14 +117,19 @@ class _MyHomePageState extends State<MyHomePage> {
                 }),
               },
             ),
-            Stack(children: <Widget>[
-              SizedBox(
-                height: 40,
-                child: Positioned(
-                  child: Image.asset('assets/image/flower.png'),
+            SizedBox(
+              height: 250,
+              child: Stack(children: <Widget>[
+                Container(
+                  color: Colors.brown[800],
                 ),
-              ),
-            ]),
+                for (var i = 0; i < _countFlower; i++)
+                  Align(
+                    alignment: Alignment(randomValue, randomValue),
+                    child: Image.asset('assets/image/flower.png', scale: 10),
+                  ),
+              ]),
+            ),
             ToggleButtons(
               highlightColor: Colors.lightBlue,
               color: Colors.blueGrey[200],
@@ -145,6 +154,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     } else {
                       isSelected[buttonIndex] = false;
                     }
+                  }
+                  if (index == 0 && _countFlower > 1) {
+                    _countFlower--;
+                  } else if (index == 1) {
+                    _countFlower = 10;
+                  } else if (index == 2) {
+                    _countFlower++;
                   }
                 });
               },
