@@ -107,7 +107,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            const SizedBox(height: 50),
             DropdownButton(
               items: _items,
               value: _selectItem,
@@ -119,17 +118,16 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             SizedBox(
               height: 250,
-              child: Stack(children: <Widget>[
-                Container(
-                  color: Colors.brown[800],
-                ),
+              child: Stack(fit: StackFit.expand, children: <Widget>[
+                Image.asset('assets/image/sougen.jpg', fit: BoxFit.fill),
                 for (var i = 0; i < _countFlower; i++)
                   Align(
-                    alignment: Alignment(randomValue, randomValue),
-                    child: Image.asset('assets/image/flower.png', scale: 10),
+                    alignment: Alignment(randomValue, (randomValue + 1) / 2),
+                    child: Image.asset('assets/image/flower.png', scale: 12),
                   ),
               ]),
             ),
+            const SizedBox(height: 20),
             ToggleButtons(
               highlightColor: Colors.lightBlue,
               color: Colors.blueGrey[200],
