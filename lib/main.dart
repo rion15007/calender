@@ -30,7 +30,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final List<DropdownMenuItem<int>> _items = [];
   int _selectItem = 0;
-  int _countFlower = 10;
+  int _countFlower = 1;
 
   List<bool> isSelected = List.generate(3, (index) => false);
   final random = Random();
@@ -120,11 +120,28 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 250,
               child: Stack(fit: StackFit.expand, children: <Widget>[
                 Image.asset('assets/image/sougen.jpg', fit: BoxFit.fill),
-                for (var i = 0; i < _countFlower; i++)
-                  Align(
-                    alignment: Alignment(randomValue, (randomValue + 1) / 2),
-                    child: Image.asset('assets/image/flower.png', scale: 12),
-                  ),
+                // for (var i = 0; i < _countFlower; i++)
+                //   Align(
+                //     alignment: Alignment(randomValue, (randomValue + 1) / 2),
+                //     child: Image.asset('assets/image/flower.png', scale: 12),
+                //   ),
+                Align(
+                  alignment: Alignment((_countFlower / 31) * 2 - 1, 0.6),
+                  child: (() {
+                    if (_countFlower < 15) {
+                      return Image.asset('assets/image/walk_girl_walk.png',
+                          scale: 2.7);
+                    } else if (_countFlower < 30) {
+                      return Image.asset(
+                          'assets/image/smartphone_girl_walk.png',
+                          scale: 3);
+                    } else {
+                      return Image.asset(
+                          'assets/image/school_randoseru_girl.png',
+                          scale: 3);
+                    }
+                  })(),
+                ),
               ]),
             ),
             const SizedBox(height: 20),
